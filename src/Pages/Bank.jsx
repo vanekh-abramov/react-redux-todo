@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Bank = () => {
   const dispatch = useDispatch();
-  const cash = useSelector((state) => state.cash);
+  const cash = useSelector((state) => state.cash.cash);
+  const customers = useSelector((state) => state.customers.customers);
 
   const addCash = (cash) => {
     dispatch({ type: "ADD_CASH", payload: cash });
@@ -23,7 +24,7 @@ const Bank = () => {
       height={"50vh"}
     >
       <Typography align="center" variant="h2" mt={5}>
-        Bank
+      {customers.length ? <>{customers[0].userName} {customers[0].userSurname}`s Bank</> : <>Bank</>}
       </Typography>
       <Box justifyContent={"space-evenly"} display={"flex"}>
         <Button
@@ -45,8 +46,16 @@ const Bank = () => {
         </Button>
       </Box>
 
-      <Typography align="center" variant="h3">
-        Total cash: {cash}
+      <Typography
+        width={"50vw"}
+        margin={"0 auto"}
+        borderRadius={2}
+        border={2}
+        borderColor={"#fff"}
+        align="center"
+        variant="h4"
+      >
+        Total cash: {cash}$
       </Typography>
     </Box>
   );

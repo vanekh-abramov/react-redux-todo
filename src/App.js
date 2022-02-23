@@ -37,11 +37,12 @@ import MenuItem from "@mui/material/MenuItem";
 import { Breadcrumbs } from "@mui/material";
 import { useSelector } from "react-redux";
 
-const pages = ["posts", "todo", "bank"];
+const pages = ["posts", "bank", "todo"];
 
 function App() {
 
-  const cash = useSelector((state) => state.cash);
+  const cash = useSelector((state) => state.cash.cash);
+  const customers = useSelector((state) => state.customers.customers);
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -53,7 +54,7 @@ function App() {
   };
 
   return (
-    <Container style={{padding: '0px', height: '100%'}}>
+    <Container style={{ padding: '0px', height: '100vh' }}>
       <AppBar position="static">
         <Container maxWidth="xl" >
           <Toolbar disableGutters>
@@ -97,9 +98,9 @@ function App() {
                 }}
               >
                 {pages.map((page) => (
-                  <Link to={page !== "posts" ? `/${page}` : "/"}>
+                  <Link key={page} to={page !== "posts" ? `/${page}` : "/"}>
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
+                      <Typography key={page} textAlign="center">{page}</Typography>
                     </MenuItem>
                   </Link>
                 ))}
@@ -113,21 +114,22 @@ function App() {
             ></Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Breadcrumbs>
-              {pages.map((page) => (
-                <Link to={page !== "posts" ? `/${page}` : "/"}>
-                  <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    {page}
-                  </Button>
-                </Link>
-              ))}
+                {pages.map((page) => (
+                  <Link key={page} to={page !== "posts" ? `/${page}` : "/"}>
+                    <Button
+                      key={page}
+                      onClick={handleCloseNavMenu}
+                      sx={{ my: 2, color: "white", display: "block" }}
+                    >
+                      {page}
+                    </Button>
+                  </Link>
+                ))}
               </Breadcrumbs>
 
             </Box>
-            <Typography >$ {cash}</Typography>
+            {customers.length ? <Typography>{customers[0].userName} {customers[0].userSurname}</Typography> : false}
+            <Typography > $ {cash}</Typography>
           </Toolbar>
         </Container>
       </AppBar>

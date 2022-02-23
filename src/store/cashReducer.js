@@ -1,5 +1,5 @@
 const initialState = {
-  cash: 1
+  cash: 0
 }
 
 export const cashReducer = (state = initialState, action) => {

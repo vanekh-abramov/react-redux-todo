@@ -1,8 +1,16 @@
 body {
   margin: 8px 0 0 0;
   padding: 0;
+  background: linear-gradient(rgb(0, 225, 255), rgb(192, 251, 255));
 }
 
 a {
   text-decoration: none;
+}
+
+.css-4zekts {
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 1rem;
+  margin: 1rem;
+  padding: 1rem;
 }
